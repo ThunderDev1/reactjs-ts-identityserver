@@ -1,7 +1,16 @@
 # reactjs-ts-identityserver
 Demo project for using Identity Server with React.js SPA and TypeScript
 
-The identity server project uses ASP.NET Identity for identity management.
+The project is in 3 parts:
+
+####IdentityServer (http://localhost:5000)
+Based off the IdentityServer4 samples, it uses uses ASP.NET Identity for identity management. You'll need to create the database (instructions bellow) to begin creating user accounts.
+
+####Spa (http://localhost:5100)
+Based off the `dotnet new reactredux` template. If the user is signed out he will be automatically  redirected to the identity server login page. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
+
+####Api (http://localhost:5200)
+Based off the `dotnet new webapi` template. Has a global authorize filter.
 
 
 ### Stuff to install
