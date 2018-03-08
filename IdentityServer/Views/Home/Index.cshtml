@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Authentication;
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<h3>User claims</h3>
+
+<dl>
+    @foreach (var claim in User.Claims)
+    {
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+
+    }
+    <dt>id token</dt>
+    <dd>@await ViewContext.HttpContext.GetTokenAsync("id_token")</dd>
+</dl>
+
+<a href="http://localhost:5100" class="btn btn-primary">Go to single page app</a>
