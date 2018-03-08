@@ -38,6 +38,8 @@ In a third command prompt:
 
 `dotnet run`
 
+Go to identity server (http://localhost:5000) create an account then go to the single page app (http://localhost:5100)
+
 ### Credits
 
 * [IdentityServer4.Samples](https://github.com/IdentityServer/IdentityServer4.Samples)
