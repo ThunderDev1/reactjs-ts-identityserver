@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{A6E10717-1B8B-40EA-B497-50EC91F73B15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServerWithAspNetIdentity", "IdentityServerWithAspNetIdentity\IdentityServerWithAspNetIdentity.csproj", "{FD8CD573-5FB2-4AA6-8D5F-09AB95DE8B04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{FD8CD573-5FB2-4AA6-8D5F-09AB95DE8B04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spa", "Spa\Spa.csproj", "{2B092002-DA6A-4CA6-B6F0-64308E067C53}"
 EndProject
