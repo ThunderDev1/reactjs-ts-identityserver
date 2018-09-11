@@ -18,7 +18,7 @@ Based off the `dotnet new webapi` template. Has a global authorize filter.
 
 ### Stuff to install
 
-Dotnet Core 2.0 SDK  
+Dotnet Core 2.1 SDK  
 Node.js  
 SQL Server (or at least LocalDb)
 
