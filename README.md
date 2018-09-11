@@ -6,7 +6,7 @@ The identity server project uses ASP.NET Identity for identity management.
 
 ### Stuff to install
 
-Dotnet Core 2.0 SDK  
+Dotnet Core 2.1 SDK  
 Node.js  
 SQL Server (or at least LocalDb)
 
