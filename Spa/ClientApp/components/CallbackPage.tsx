@@ -33,4 +33,4 @@ class CallbackPage extends React.Component<RouteComponentProps<{}> & { dispatch:
   }
 }
 
-export default connect()(CallbackPage) as typeof CallbackPage;
+export default connect()(CallbackPage);

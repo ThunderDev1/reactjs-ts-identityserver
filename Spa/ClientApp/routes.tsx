@@ -1,5 +1,4 @@
 import Home from './components/Home';
-import FetchData from './components/FetchData';
 import Counter from './components/Counter';
 
 import * as React from 'react';
@@ -8,12 +7,13 @@ import { Route, Switch } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 
 import CallbackPage from './components/CallbackPage';
-import { ApplicationState, AppThunkAction } from './store';
+import { ApplicationState } from './store';
 
 import userManager from './userManager';
 import { User } from 'oidc-client';
 import Layout from './components/Layout';
 import axios from 'axios';
+import UserInfo from './components/UserInfo';
 
 type RoutesModuleProps =
     { user: User, isLoadingUser: boolean }
@@ -36,35 +36,20 @@ class RoutesModule extends React.Component<RoutesModuleProps, {}>{
 
         // check if user is signed in
         userManager.getUser().then(user => {
-            if (!user || user.expired) {
-                // if no user found, or token has expired, auto redirect to identity server signin page
-                // pass the current path to redirect to the correct page after successfull login
-                userManager.signinRedirect({ data: { path: window.location.pathname } });
-                return null;
-
-                // currently, if the user is not authenticated, he can't access any pages
-                // you could however comment the two lines above and instead 
-                // return routes that do not require authentication ("public pages")
-                // you would have a signin button somewhere that calls the signinRedirect() method
-            }else{
-                // I'm using axios for api calls
-                // this sets the authorization header and base url that will be used for every api call
+            if (user && !user.expired) {
+                // Set the authorization header for axios
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
-                axios.defaults.baseURL = 'http://localhost:5200/api';
             }
         });
 
-        // wait for userManager to load the user
-        if (!this.props.user)
-            return null;
+        let isConnected: boolean = !!this.props.user;
 
-        // user is signed in, return all your routes
         return (
             <Switch>
-                <Layout>
+                <Layout isConnected={isConnected}>
                     <Route exact path='/' component={Home} />
                     <Route path='/counter' component={Counter} />
-                    <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
+                    <Route path='/user' component={UserInfo} />
                 </Layout>
             </Switch>
         )

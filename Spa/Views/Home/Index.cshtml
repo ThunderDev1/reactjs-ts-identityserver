@@ -2,8 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="react-app">Loading...</div>
+<div id="react-app">
+    <div style="margin-top: 200px;">
+        <div class="ui active centered inline loader massive"></div>
+    </div>
+</div>
 
 @section scripts {
-    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+    <script src="~/dist/main.js" asp-append-version="true"></script>
 }

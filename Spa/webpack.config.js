@@ -1,56 +1,76 @@
+/* eslint-disable */
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-const merge = require('webpack-merge');
+const autoprefixer = require('autoprefixer');
 
 module.exports = (env) => {
-    const isDevBuild = !(env && env.prod);
-
-    // Configuration in common to both client-side and server-side bundles
-    const sharedConfig = () => ({
-        stats: { modules: false },
-        resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-        output: {
-            filename: '[name].js',
-            publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+  const isDevBuild = !(env && env.prod);
+  return [{
+    // cache: false,
+    mode: isDevBuild ? 'development' : 'production',
+    stats: { modules: false },
+    entry: { 'main': './ClientApp/boot.tsx' },
+    resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    output: {
+      path: path.join(__dirname, './wwwroot/dist'),
+      filename: '[name].js',
+      publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/, include: /ClientApp/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: { babelrc: false, plugins: ['react-hot-loader/babel'], },
+            },
+            'awesome-typescript-loader?silent=true', // (or awesome-typescript-loader)
+          ]
         },
-        module: {
-            rules: [
-                { test: /\.tsx?$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
-            ]
-        },
-        plugins: [new CheckerPlugin()]
-    });
-
-    // Configuration for client-side bundle suitable for running in browsers
-    const clientBundleOutputDir = './wwwroot/dist';
-    const clientBundleConfig = merge(sharedConfig(), {
-        entry: { 'main-client': './ClientApp/boot.tsx' },
-        module: {
-            rules: [
-                { test: /\.css$/, use: ExtractTextPlugin.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) }
-            ]
-        },
-        output: { path: path.join(__dirname, clientBundleOutputDir) },
-        plugins: [
-            new ExtractTextPlugin('site.css'),
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require('./wwwroot/dist/vendor-manifest.json')
-            })
-        ].concat(isDevBuild ? [
-            // Plugins that apply in development builds only
-            new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map', // Remove this line if you prefer inline source maps
-                moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-            })
-        ] : [
-            // Plugins that apply in production builds only
-            new webpack.optimize.UglifyJsPlugin()
-        ])
-    });
-
-    return [clientBundleConfig];
+        { test: /\.js$/, use: ["source-map-loader"], enforce: "pre" },
+        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
+        {
+          test: /\.(sa|sc|c)ss$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            //'postcss-loader',
+            {
+              loader: require.resolve('postcss-loader'),
+              options: {
+                // Necessary for external CSS imports to work
+                // https://github.com/facebookincubator/create-react-app/issues/2677
+                ident: 'postcss',
+                plugins: () => [
+                  require('postcss-flexbugs-fixes'),
+                  autoprefixer({
+                    browsers: [
+                      '>1%',
+                      'last 4 versions',
+                      'Firefox ESR',
+                      'not ie < 9', // React doesn't support IE8 anyway
+                    ],
+                    flexbox: 'no-2009',
+                  }),
+                ],
+              },
+            },
+            'sass-loader',
+          ]
+        }
+      ]
+    },
+    plugins: [
+      new CheckerPlugin(),
+      new webpack.DllReferencePlugin({
+        context: __dirname,
+        manifest: require('./wwwroot/dist/vendor-manifest.json')
+      })
+    ],
+    optimization: { minimize: !isDevBuild },
+    devtool: isDevBuild ? 'inline-source-map' : 'source-map'
+  }]
 };

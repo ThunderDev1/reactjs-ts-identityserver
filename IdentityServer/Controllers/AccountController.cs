@@ -260,17 +260,12 @@ namespace IdentityServerWithAspNetIdentity.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Logout(string logoutId)
         {
-            // build a model so the logout page knows what to display
-            var vm = await _account.BuildLogoutViewModelAsync(logoutId);
-
-            if (vm.ShowLogoutPrompt == false)
-            {
-                // if the request for logout was properly authenticated from IdentityServer, then
-                // we don't need to show the prompt and can just log the user out directly.
-                return await Logout(vm);
-            }
-
-            return View(vm);
+            var logout = await _interaction.GetLogoutContextAsync(logoutId);
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            // logout.PostLogoutRedirectUri is always null...
+            // use hardcoded url for now.
+            return Redirect("http://localhost:5100");
         }
 
         [HttpPost]

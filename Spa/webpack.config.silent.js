@@ -1,7 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const bundleOutputDir = './wwwroot';
 
@@ -9,6 +6,7 @@ module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
         stats: { modules: false },
+        mode: isDevBuild ? 'development' : 'production',
         entry: {
             silentRenew: ['./silent_renew/index.js']
         },
@@ -27,10 +25,18 @@ module.exports = (env) => {
                 chunks: ['silentRenew'],
                 filename: 'silent_renew.html',
             }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'silentRenew',
-                chunks: ['commons'],
-            }),
-        ]
+        ],
+        optimization: {
+            splitChunks: {
+              cacheGroups: {
+                commons: {
+                  chunks: "initial",
+                  minChunks: 3,
+                  name: "silentRenew",
+                  enforce: true
+                }
+              }
+            }
+          }
     }];
 };

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose, combineReducers, GenericStoreEnhancer, Store, StoreEnhancerStoreCreator, ReducersMapObject } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers, StoreEnhancer, Store, StoreEnhancerStoreCreator, ReducersMapObject } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { reducer as oidcReducer } from 'redux-oidc';
@@ -13,7 +13,7 @@ export default function configureStore(history: History, initialState?: Applicat
     // Build middleware. These are functions that can process the actions before they reach the store.
     const windowIfDefined = typeof window === 'undefined' ? null : window as any;
     // If devTools is installed, connect to it
-    const devToolsExtension = windowIfDefined && windowIfDefined.devToolsExtension as () => GenericStoreEnhancer;
+    const devToolsExtension = windowIfDefined && windowIfDefined.devToolsExtension as () => StoreEnhancer;
 
     userManager.events.addSilentRenewError(function (error) {
         console.error('error while renewing the access token', error);
@@ -21,7 +21,7 @@ export default function configureStore(history: History, initialState?: Applicat
 
     const oidcMiddleware = createOidcMiddleware(userManager);
 
-    const createStoreWithMiddleware = compose(
+    const createStoreWithMiddleware = compose<StoreEnhancerStoreCreator<any>>(
         applyMiddleware(oidcMiddleware, thunk, routerMiddleware(history), logger),
         devToolsExtension ? devToolsExtension() : <S>(next: StoreEnhancerStoreCreator<S>) => next
     )(createStore);
@@ -41,6 +41,10 @@ export default function configureStore(history: History, initialState?: Applicat
     return store;
 }
 
-function buildRootReducer(allReducers: ReducersMapObject) {
+// function buildRootReducer(allReducers: ReducersMapObject) {
+//     return combineReducers<ApplicationState>(Object.assign({}, allReducers, { routing: routerReducer, oidc: oidcReducer }));
+// }
+
+function buildRootReducer(allReducers: any) {
     return combineReducers<ApplicationState>(Object.assign({}, allReducers, { routing: routerReducer, oidc: oidcReducer }));
 }

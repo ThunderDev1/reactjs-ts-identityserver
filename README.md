@@ -9,7 +9,7 @@ Based off the IdentityServer4 samples, it uses uses ASP.NET Identity for identit
 
 #### Spa (http://localhost:5100)
 
-Based off the `dotnet new reactredux` template. If the user is signed out he will be automatically  redirected to the identity server login page. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
+Based off the `dotnet new reactredux` template. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
 
 #### Api (http://localhost:5200)
 
@@ -51,6 +51,10 @@ In a third command prompt:
 `dotnet run`
 
 Go to identity server (http://localhost:5000) create an account then go to the single page app (http://localhost:5100)
+
+You may need to change the environment variable on each project, either
+* run `set ASPNETCORE_ENVIRONMENT=Development` in Windows cmd terminal
+* run `$Env:ASPNETCORE_ENVIRONMENT = "Development"` in Windows powershell terminal
 
 ### Credits
 
