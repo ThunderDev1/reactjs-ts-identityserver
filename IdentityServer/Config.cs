@@ -39,11 +39,11 @@ namespace IdentityServerWithAspNetIdentity
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
-                    AccessTokenLifetime = 3600 * 24,
+                    AccessTokenLifetime = 120,
 
                     RedirectUris = { 
-                        "http://localhost:5100/callback",
-                        "http://localhost:5100/silent_renew.html",
+                        "http://localhost:5100/#/callback",
+                        "http://localhost:5100/silentRenew.html",
                     },
                     PostLogoutRedirectUris = 
                     { 

@@ -9,7 +9,7 @@ Based off the IdentityServer4 samples, it uses uses ASP.NET Identity for identit
 
 #### Spa (http://localhost:5100)
 
-Based off the `dotnet new reactredux` template. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
+Pure react SPA with TypeScript and webpack. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
 
 #### Api (http://localhost:5200)
 
@@ -32,7 +32,7 @@ Open a command prompt in project location:
 
 `npm install`
 
-`dotnet run`
+`npm start`
 
 
 In a second command prompt:
@@ -59,5 +59,4 @@ You may need to change the environment variable on each project, either
 ### Credits
 
 * [IdentityServer4.Samples](https://github.com/IdentityServer/IdentityServer4.Samples)
-* [Dotnet core templates](https://github.com/aspnet/JavaScriptServices) 
 * [redux-oidc](https://github.com/maxmantz/redux-oidc)
