@@ -14,7 +14,6 @@ import axios from 'axios';
 import UserInfo from './components/UserInfo';
 import {Dispatch} from 'redux';
 import Contact from './components/Contact';
-
 import Nav from './components/Nav';
 
 interface RoutesModuleProps {
@@ -53,7 +52,7 @@ const Routes = (props: RoutesModuleProps) => {
 
   return (
     <React.Fragment>
-      <Nav isConnected={isConnected} />
+      <Nav isConnected={isConnected} path={props.location.pathname} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/counter" component={Counter} />

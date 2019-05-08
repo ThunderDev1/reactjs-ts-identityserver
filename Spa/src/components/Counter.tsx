@@ -1,37 +1,36 @@
 import * as React from 'react';
-import {FunctionComponent, ReactElement, Fragment, useEffect} from 'react';
 import * as CounterStore from '../store/Counter';
 import {AppState} from '../store';
 import {connect} from 'react-redux';
 
 interface DispatchProps {
-  load: () => void;
   increment: () => void;
   decrement: () => void;
 }
 
 type CounterProps = CounterStore.CounterState & DispatchProps;
 
-const Counter: FunctionComponent<CounterProps> = (props: CounterProps): ReactElement => {
-  useEffect(() => {
-    props.load();
-  }, []);
-
+const Counter = (props: CounterProps) => {
   return (
-    <Fragment>
-      <h1>Counter</h1>
-      <p>This is a simple example of a React component.</p>
-      <p>
-        Current count: <strong>{props.count}</strong>
-      </p>
+    <div className="container">
+      <h2>Counter</h2>
+      <p>This is a simple example of a redux connected React component.</p>
+      <p>Current count: <strong>{props.count}</strong></p>
       <button
-        onClick={(): void => {
+        className="btn btn-primary btn-sm"
+        onClick={() => {
           props.increment();
         }}>
         Increment
       </button>
-      <strong>{props.isLoading ? 'Loading...' : ''}</strong>
-    </Fragment>
+      <button
+        className="btn btn-primary btn-sm mx-1"
+        onClick={() => {
+          props.decrement();
+        }}>
+        Decrement
+      </button>
+    </div>
   );
 };
 

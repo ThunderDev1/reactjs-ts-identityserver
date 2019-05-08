@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.tsx",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development --port 5100",
+    "start": "webpack-dev-server --mode development --port 5100",
     "build": "webpack --mode production",
     "lint": "./node_modules/eslint/bin/eslint"
   },
@@ -17,13 +17,15 @@
     "oidc-client": "1.7.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-github-btn": "1.0.5",
     "react-hot-loader": "4.8.4",
     "react-redux": "7.0.3",
     "react-router-dom": "5.0.0",
     "redux": "4.0.1",
     "redux-logger": "3.0.6",
     "redux-oidc": "3.1.2",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "spectre.css": "0.5.8"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",
@@ -44,15 +46,18 @@
     "@typescript-eslint/parser": "1.7.0",
     "babel-loader": "8.0.5",
     "copy-webpack-plugin": "5.0.3",
+    "css-loader": "2.1.1",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.2.0",
     "eslint-plugin-react": "7.12.4",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
     "prettier": "1.17.0",
+    "style-loader": "0.23.1",
     "ts-loader": "5.4.5",
     "ts-node": "8.1.0",
     "typescript": "3.4.3",
+    "url-loader": "1.1.2",
     "webpack": "4.30.0",
     "webpack-cli": "3.3.1",
     "webpack-dev-server": "3.3.1"

@@ -6,7 +6,7 @@ const config: webpack.Configuration = {
   devtool: 'inline-source-map',
   entry: {
     main: './src/index.tsx',
-    silentRenew: './silentRenew/index.js'
+    silentRenew: './silentRenew/index.js',
   },
   output: {
     filename: '[name].js',
@@ -28,19 +28,23 @@ const config: webpack.Configuration = {
         test: /\.html$/,
         use: ['html-loader'],
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
 
   plugins: [
     new HtmlWebPackPlugin({
       template: './index.html',
-      chunks: ['main']
+      chunks: ['main'],
     }),
     new HtmlWebPackPlugin({
       template: './silentRenew/silentRenew.html',
       filename: 'silentRenew.html',
-      chunks: ['silentRenew']
-    })
+      chunks: ['silentRenew'],
+    }),
   ],
 };
 
