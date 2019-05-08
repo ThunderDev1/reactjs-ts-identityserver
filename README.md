@@ -1,6 +1,8 @@
 # reactjs-ts-identityserver
 Demo project for using Identity Server with React.js SPA and TypeScript
 
+![Demo Gif](https://statics.blob.core.windows.net/public/reactjs-ts-identityserver-demo.gif)
+
 The project is in 3 parts:
 
 #### IdentityServer (http://localhost:5000)
@@ -9,7 +11,7 @@ Based off the IdentityServer4 samples, it uses uses ASP.NET Identity for identit
 
 #### Spa (http://localhost:5100)
 
-Pure react SPA with TypeScript and webpack. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
+A single page application made with React, TypeScript and Webpack. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
 
 #### Api (http://localhost:5200)
 
@@ -18,7 +20,7 @@ Based off the `dotnet new webapi` template. Has a global authorize filter.
 
 ### Stuff to install
 
-Dotnet Core 2.1 SDK  
+Dotnet Core 2.2 SDK  
 Node.js  
 SQL Server (or at least LocalDb)
 
