@@ -1,7 +1,7 @@
 # reactjs-ts-identityserver
 Demo project for using Identity Server with React.js SPA and TypeScript
 
-![Demo Gif](https://statics.blob.core.windows.net/public/reactjs-ts-identityserver.gif)
+![Demo Gif](https://statics.blob.core.windows.net/public/reactjs-ts-identityserver2.gif)
 
 The project is in 3 parts:
 
