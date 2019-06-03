@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@hot-loader/react-dom": "16.8.6",
-    "axios": "0.18.0",
+    "axios": "0.19.0",
     "connected-react-router": "6.4.0",
     "history": "4.9.0",
     "oidc-client": "1.7.1",
