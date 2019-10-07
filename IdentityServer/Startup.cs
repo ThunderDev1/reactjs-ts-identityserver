@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using IdentityServerWithAspNetIdentity.Data;
 using IdentityServerWithAspNetIdentity.Models;
 using IdentityServerWithAspNetIdentity.Services;
+using Microsoft.Extensions.Hosting;
 
 namespace IdentityServerWithAspNetIdentity
 {
@@ -56,7 +57,7 @@ namespace IdentityServerWithAspNetIdentity
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -69,16 +70,16 @@ namespace IdentityServerWithAspNetIdentity
             }
 
             app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthorization();
 
             // app.UseIdentity(); // not needed, since UseIdentityServer adds the authentication middleware
             app.UseIdentityServer();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
