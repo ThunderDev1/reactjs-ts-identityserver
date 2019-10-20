@@ -1,7 +1,6 @@
 import * as React from 'react';
 import userManager from '../userManager';
 import {Link} from 'react-router-dom';
-import GitHubButton from 'react-github-btn';
 
 interface NavProps {
   isConnected: boolean;
@@ -49,14 +48,11 @@ const Nav = (props: NavProps) => {
           <b>react-ts-identityserver</b>
         </a>
       </section>
-      <section className="navbar-section mx-2">
-        <GitHubButton
-          data-size="large"
-          data-icon="octicon-star"
-          data-show-count
-          href="https://github.com/ThunderDev1/reactjs-ts-identityserver">
-          Star
-        </GitHubButton>
+      <section className="navbar-section">
+        <a href="https://github.com/ThunderDev1/reactjs-ts-identityserver"
+          className="btn btn-link"
+          target="_blank"
+        >GitHub</a>
       </section>
     </header>
   );
