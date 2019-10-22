@@ -78,7 +78,7 @@ namespace IdentityServerWithAspNetIdentity
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{Action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
