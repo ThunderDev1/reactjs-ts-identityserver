@@ -1,6 +1,11 @@
 {
   "name": "spa",
   "version": "1.0.0",
+  "description": "Demo app for using Identity Server with React.js SPA, .Net Core 3.0 and TypeScript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThunderDev1/reactjs-ts-identityserver.git"
+  },
   "main": "index.tsx",
   "scripts": {
     "start": "webpack-dev-server --mode development --port 5100",
