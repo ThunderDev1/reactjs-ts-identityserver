@@ -52,7 +52,7 @@ In a third command prompt:
 
 `dotnet run`
 
-Go to identity server (http://localhost:5000) create an account then go to the single page app (http://localhost:5100)
+Go to identity server (http://localhost:5000/Account/Register) create an account then go to the single page app (http://localhost:5100)
 
 You may need to change the environment variable on each project, either
 * run `set ASPNETCORE_ENVIRONMENT=Development` in Windows cmd terminal
