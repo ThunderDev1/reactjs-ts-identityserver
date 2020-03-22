@@ -15,7 +15,6 @@
   "author": "ThunderDev1",
   "license": "ISC",
   "dependencies": {
-    "@hot-loader/react-dom": "^16.11.0",
     "axios": "^0.19.0",
     "connected-react-router": "^6.6.1",
     "history": "^4.10.1",
