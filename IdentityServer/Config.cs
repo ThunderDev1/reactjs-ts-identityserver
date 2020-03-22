@@ -42,7 +42,7 @@ namespace IdentityServerWithAspNetIdentity
                     AccessTokenLifetime = 120,
 
                     RedirectUris = { 
-                        "http://localhost:5100/#/callback",
+                        "http://localhost:5100/callback",
                         "http://localhost:5100/silentRenew.html",
                     },
                     PostLogoutRedirectUris = 

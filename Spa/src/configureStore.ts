@@ -4,11 +4,13 @@ import logger from 'redux-logger';
 import createOidcMiddleware from 'redux-oidc';
 import userManager from './userManager';
 import {routerMiddleware} from 'connected-react-router';
-import {History} from 'history';
+import { createBrowserHistory } from 'history'
 
 import createRootReducer from './store';
 
-const configureStore = (history: History) => {
+export const history = createBrowserHistory()
+
+const configureStore = () => {
   userManager.events.addSilentRenewError(function(error) {
     console.error('error while renewing the access token', error);
   });

@@ -8,7 +8,6 @@ import {useEffect} from 'react';
 
 interface CallbackPageProps {
   dispatch: Dispatch;
-  signInParams: string;
 }
 
 const CallbackPage = (props: CallbackPageProps) => {
@@ -23,15 +22,9 @@ const CallbackPage = (props: CallbackPageProps) => {
     props.dispatch(push('/'));
   };
 
-  // by default userManager gets params from the current route
-  // eg. 'localhost:5100/callback#token_id=...&session_state=...
-  //                              ------------------------------
-  // this doesn't work when using hash history as the first hash messed up the process
-  // eg. 'localhost:5100/#/callback#token_id=...&session_state=...
-  // need to pass the token manually to signinRedirectCallback function
   useEffect(() => {
     userManager
-      .signinRedirectCallback(props.signInParams)
+      .signinRedirectCallback()
       .then(user => successCallback(user))
       .catch(error => errorCallback(error));
   });
