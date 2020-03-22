@@ -32,9 +32,9 @@ Open a command prompt in project location:
 
 `cd Spa`
 
-`npm install`
+`yarn`
 
-`npm start`
+`yarn serve`
 
 
 In a second command prompt:

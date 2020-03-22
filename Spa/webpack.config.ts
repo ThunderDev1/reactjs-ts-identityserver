@@ -12,10 +12,7 @@ const config: webpack.Configuration = {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
