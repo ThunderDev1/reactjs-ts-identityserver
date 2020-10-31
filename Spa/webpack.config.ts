@@ -9,7 +9,7 @@ const config: webpack.Configuration = {
     silentRenew: './silentRenew/index.js',
   },
   output: {
-    filename: '[name].js',
+    filename: '[name].js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -30,6 +30,12 @@ const config: webpack.Configuration = {
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+
+  devServer: {
+    // Redirects all 404s to the index page
+    // this is needed for the callback page to work in development
+    historyApiFallback: true,
   },
 
   plugins: [

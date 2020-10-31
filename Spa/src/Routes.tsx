@@ -31,15 +31,6 @@ const Routes = (props: RoutesModuleProps) => {
     return <div>Loading...</div>;
   }
 
-  // if location is callback page, return only CallbackPage route to allow signin process
-  // IdentityServer 'bug' with hash history: if callback page contains a '#' params are appended with no delimiter
-  // eg. /callbacktoken_id=...
-  const url = props.location.pathname.substring(0, 9);
-  if (url === '/callback') {
-    const rest = props.location.pathname.substring(9);
-    return <CallbackPage {...props} signInParams={`${url}#${rest}`} />;
-  }
-
   // check if user is signed in
   userManager.getUser().then(user => {
     if (user && !user.expired) {
@@ -55,6 +46,7 @@ const Routes = (props: RoutesModuleProps) => {
       <Nav isConnected={isConnected} path={props.location.pathname} />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/callback" component={CallbackPage} />
         <Route path="/counter" component={Counter} />
         <Route path="/user" component={UserInfo} />
         <Route path="/contact" component={Contact} />

@@ -13,6 +13,9 @@ Based off the IdentityServer4 samples, it uses uses ASP.NET Identity for identit
 
 A single page application made with React, TypeScript and Webpack. Uses [redux-oidc](https://github.com/maxmantz/redux-oidc) package for managing authentication.
 
+Note: I'm no longer using hash router, webpack dev server is configured to redirect all pages to index.html.
+When deploying to production, you will need a similar mecanism for the callback page to work (this can easily be done using Netlify or Firebase hosting).
+
 #### Api (http://localhost:5200)
 
 Based off the `dotnet new webapi` template. Has a global authorize filter.
@@ -22,11 +25,20 @@ Based off the `dotnet new webapi` template. Has a global authorize filter.
 
 Dotnet Core 3.0 SDK  
 Node.js  
-SQL Server (or at least LocalDb)
+SQL Server express
 
 ### Running the project
 
 Clone repository
+
+Add a secrets.json file in IdentityServer folder with the following (replace user id and password):
+```
+{
+    "ConnectionStrings": {
+      "DefaultConnection": "Server=(local);Database=AspIdentity;MultipleActiveResultSets=true;user id=*****;password=*****;"
+    }
+}
+```
 
 Open a command prompt in project location:
 
@@ -57,6 +69,7 @@ Go to identity server (http://localhost:5000) create an account then go to the s
 You may need to change the environment variable on each project, either
 * run `set ASPNETCORE_ENVIRONMENT=Development` in Windows cmd terminal
 * run `$Env:ASPNETCORE_ENVIRONMENT = "Development"` in Windows powershell terminal
+* run `ASPNETCORE_ENVIRONMENT=Development` in Linux bash
 
 ### Credits
 
