@@ -57,6 +57,32 @@ namespace IdentityServerWithAspNetIdentity
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1"
                     },
+                },
+                new Client
+                {
+                    ClientId = "spa2",
+                    ClientName = "SinglePage2",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
+                    AccessTokenLifetime = 120,
+
+                    RedirectUris = { 
+                        "http://localhost:3000/callback",
+                        "http://localhost:3000/silentRenew.html",
+                    },
+                    PostLogoutRedirectUris = 
+                    { 
+                        "http://localhost:5000/account/login"
+                    },
+                    AllowedCorsOrigins = { "http://localhost:3000" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    },
                 }
             };
         }
